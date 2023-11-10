@@ -15,8 +15,6 @@ public class Word {
   @Column(nullable = false)
   private String word;
   @Column(nullable = false)
-  private String description;
-  @Column(nullable = false)
   private String translation;
   @Column(nullable = false)
   private String status;
