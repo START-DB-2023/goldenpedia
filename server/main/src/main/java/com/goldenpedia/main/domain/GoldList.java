@@ -16,8 +16,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "goldlists")
 public class GoldList {
   @Id
@@ -42,37 +44,4 @@ public class GoldList {
     this.description = description;
     this.words = words;
   }
-
-  public Long getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public List<Word> getWords() {
-    return words;
-  }
-
-  public void setWords(List<Word> words) {
-    this.words = words;
-  }
-
-  public LocalTime getCreatedAt() {
-    return createdAt;
-  }
-
 }

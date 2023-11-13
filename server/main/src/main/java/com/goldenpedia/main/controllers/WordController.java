@@ -21,7 +21,7 @@ public class WordController {
 
     @GetMapping("/{status}")
     private ResponseEntity<List<Word>> getWordsByStatus(String requestedStatus){
-        return ResponseEntity.ok(wordRepository.findByStatus(requestedStatus));
+        return ResponseEntity.ok(wordRepository.buscarPalavraPorStatus(requestedStatus));
     }
 
     @PutMapping("/updateStatus")
