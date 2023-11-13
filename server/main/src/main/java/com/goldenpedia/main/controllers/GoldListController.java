@@ -27,4 +27,14 @@ public class GoldListController {
         GoldList goldList = goldListRepository.save(newGoldListRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(goldList);
     }
+    
+    @GetMapping()
+    private ResponseEntity<GoldList> getGoldList( @RequestParam(value = "goldListId") Long goldListId){
+        GoldList goldList = goldListRepository.findById(goldListId).orElse(null);
+        if (goldList == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(goldList);
+    }
+
 }
