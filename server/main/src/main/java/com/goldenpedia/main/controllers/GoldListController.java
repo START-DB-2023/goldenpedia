@@ -37,4 +37,12 @@ public class GoldListController {
         return ResponseEntity.ok(goldList);
     }
 
+    @GetMapping("/words")
+    private ResponseEntity<List<Word>> getWordsByListId( @RequestParam(value = "goldListId") Long goldListId, @RequestParam(value = "wordStatus") String wordStatus){
+        GoldList goldList = goldListRepository.findById(goldListId).orElse(null);
+        if (goldList == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(goldList.getWords());
+    } 
 }
