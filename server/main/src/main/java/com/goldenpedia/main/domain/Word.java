@@ -11,20 +11,20 @@ import jakarta.persistence.Table;
 @Table(name="words")
 public class Word {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
   @Column(nullable = false)
   private String word;
   @Column(nullable = false)
-  private String description;
-  @Column(nullable = false)
   private String translation;
   @Column(nullable = false)
-  private String status;
+  private String status = "Revisar";
 
 
-  public Word(String word, String description, String translation){
+  protected Word(){}
+
+  public Word(String word, String translation){
     this.word = word;
-    this.description = description;
     this.translation = translation;
   }
 
@@ -36,16 +36,6 @@ public class Word {
 
   public void setWord(String word) {
     this.word = word;
-  }
-
-
-  public String getDescription() {
-    return description;
-  }
-
-
-  public void setDescription(String description) {
-    this.description = description;
   }
 
 
