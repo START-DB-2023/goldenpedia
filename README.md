@@ -39,7 +39,14 @@ Este aplicativo web implementa a nossa adaptação do método de forma virtual. 
   
 ## Contribuidores
 
-Está seção está sendo escrita e será adicionada em breve a este README.md
+<table>
+  <tbody>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/amslimaa"><img src="https://avatars.githubusercontent.com/u/20290589?v=4" width="100px;" alt="Amós Lima"/><br /><sub><b>Amós Lima</b></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/everson-silva"><img src="https://avatars.githubusercontent.com/u/73316157?v=4" width="100px;" alt="Everson Silva"/><br /><sub><b>Everson Silva</b></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Lucca08"><img src="https://avatars.githubusercontent.com/u/88330101?v=4" width="100px;" alt="Lucca"/><br /><sub><b>Lucca</b></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ThamirisMaria"><img src="https://avatars.githubusercontent.com/u/73439911?v=4?s=100" width="100px;" alt="Thamiris Maria"/><br /><sub><b>Thamiris Maria</b></td>
+  </tbody>
+</table>
 
 ## Getting Started
 
