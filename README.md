@@ -8,7 +8,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/START-DB-2023/goldenpedia/">
-    <img src="https://github.com/START-DB-2023/goldenpedia/assets/73439911/98f56e31-b956-42c5-8473-ae6e95ed4ae9" alt="logo-goldenpedia" width="300" height="250">
+    <img src="https://github.com/START-DB-2023/goldenpedia/assets/73439911/661f1603-0520-40d2-900d-be1693c536c4" alt="logo-goldenpedia" width="300" height="223.94">
   </a>
   <h3 align="center">GoldenPedIA</h3>
   Sistema de aprendizado de idiomas utilizando o "Gold List Method".
@@ -55,7 +55,12 @@ Está seção está sendo escrita e será adicionada em breve a este README.md
 
 ## Desenvolvido com
 
-Está seção está sendo escrita e será adicionada em breve a este README.md
+  <img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg" alt="typescript" height="50" width="50"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" alt="react" height="50" width="50"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/materialui/materialui-original.svg" alt="material ui" height="50" width="50"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" alt="java" height="50" width="50"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/spring/spring-original.svg" alt="spring" height="50" width="50"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-original.svg" alt="postgresql" height="50" width="50"/>&nbsp;
   
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
