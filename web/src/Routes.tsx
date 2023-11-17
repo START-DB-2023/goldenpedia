@@ -9,11 +9,9 @@ export function Router() {
   return (
     <Routes>
       <Route path='/' element={<DefaultLayout />}>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/newgoldlist" element={<NewGoldListPage/>} />
-
+        <Route path="/" element={<HomePage />} />
+        <Route path="/newgoldlist" element={<NewGoldListPage/>} />
       </Route>
-       
     </Routes>
   )
 }
