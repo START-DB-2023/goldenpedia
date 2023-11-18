@@ -13,17 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.goldenpedia.main.domain.Word;
 import com.goldenpedia.main.repository.WordRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/words")
 public class WordController {
     @Autowired
     WordRepository wordRepository;
 
+    @Operation(summary = "Get Words By Status", description = "Returns all the words with a specific status")
     @GetMapping("/{status}")
     private ResponseEntity<List<Word>> getWordsByStatus(String requestedStatus){
         return ResponseEntity.ok(wordRepository.buscarPalavraPorStatus(requestedStatus));
     }
 
+    @Operation(summary = "Update Word Status", description = "Updates a word's status")
     @PutMapping("/updateStatus")
     private ResponseEntity<Word> updateStatus(@RequestParam(value = "wordId") Long wordId, @RequestParam(value = "status") String status){
         Word word = wordRepository.findById(wordId).orElse(null);

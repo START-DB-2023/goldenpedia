@@ -3,6 +3,8 @@ package com.goldenpedia.main.controllers;
 import com.goldenpedia.main.domain.*;
 import com.goldenpedia.main.repository.GoldListRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +23,16 @@ public class GoldListController {
     @Autowired
     GoldListRepository goldListRepository;
 
-
+    @Operation(summary = "Create Gold List", description = "Creates a new Gold List")
     @PostMapping
-    private ResponseEntity<GoldList> createGoldList(@RequestBody GoldList newGoldListRequest){
+    private ResponseEntity<GoldList> createGoldList(@RequestBody GoldList newGoldListRequest) {
         GoldList goldList = goldListRepository.save(newGoldListRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(goldList);
     }
-    
+
+    @Operation(summary = "Get Gold List By Id", description = "Returns a Gold List with a specific id")
     @GetMapping()
-    private ResponseEntity<GoldList> getGoldList( @RequestParam(value = "goldListId") Long goldListId){
+    private ResponseEntity<GoldList> getGoldList(@RequestParam(value = "goldListId") Long goldListId) {
         GoldList goldList = goldListRepository.findById(goldListId).orElse(null);
         if (goldList == null) {
             return ResponseEntity.notFound().build();
@@ -37,8 +40,10 @@ public class GoldListController {
         return ResponseEntity.ok(goldList);
     }
 
+    @Operation(summary = "Get Word By Gold List Id", description = "Returns a word within a Gold List with a specific id")
     @GetMapping("/words")
-    private ResponseEntity<List<Word>> getWordsByListId( @RequestParam(value = "goldListId") Long goldListId, @RequestParam(value = "wordStatus") String wordStatus){
+    private ResponseEntity<List<Word>> getWordsByListId(@RequestParam(value = "goldListId") Long goldListId,
+            @RequestParam(value = "wordStatus") String wordStatus) {
 
         List<Word> words = goldListRepository.buscarPalavrasPorGListEStatus(goldListId, wordStatus);
         GoldList goldList = goldListRepository.findById(goldListId).orElse(null);
@@ -46,5 +51,5 @@ public class GoldListController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(words);
-    } 
+    }
 }
