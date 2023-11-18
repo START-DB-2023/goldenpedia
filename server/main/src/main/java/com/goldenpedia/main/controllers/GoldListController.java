@@ -40,6 +40,16 @@ public class GoldListController {
         return ResponseEntity.ok(goldList);
     }
 
+    @Operation(summary = "Get All Gold Lists", description = "Returns all the Gold Lists")
+    @GetMapping("/all")
+    private ResponseEntity<Iterable<GoldList>> getAllGoldLists() {
+        Iterable<GoldList> goldList = goldListRepository.findAll();
+        if (goldList == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(goldList);
+    }
+
     @Operation(summary = "Get Word By Gold List Id", description = "Returns a word within a Gold List with a specific id")
     @GetMapping("/words")
     private ResponseEntity<List<Word>> getWordsByListId(@RequestParam(value = "goldListId") Long goldListId,
