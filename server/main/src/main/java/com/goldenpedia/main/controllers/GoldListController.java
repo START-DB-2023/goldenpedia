@@ -56,16 +56,22 @@ public class GoldListController {
         return ResponseEntity.ok(goldLists);
     }
 
-    @Operation(summary = "Get Word By Gold List Id", description = "Returns a word within a Gold List with a specific id")
+    @Operation(summary = "Get Words By Gold List Id", description = "Returns words within a Gold List with a specific id")
     @GetMapping("/words")
     private ResponseEntity<List<Word>> getWordsByListId(@RequestParam(value = "goldListId") Long goldListId,
-            @RequestParam(value = "wordStatus") String wordStatus) {
+            @RequestParam(value = "wordStatus", required = false) String wordStatus) {
 
-        List<Word> words = goldListRepository.buscarPalavrasPorGListEStatus(goldListId, wordStatus);
         GoldList goldList = goldListRepository.findById(goldListId).orElse(null);
         if (goldList == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(words);
+
+        if (wordStatus == null) {
+            List<Word> words = goldListRepository.buscarPalavrasPorGList(goldListId);
+            return ResponseEntity.ok(words);
+        } else {
+            List<Word> words = goldListRepository.buscarPalavrasPorGListEStatus(goldListId, wordStatus);
+            return ResponseEntity.ok(words);
+        }
     }
 }
