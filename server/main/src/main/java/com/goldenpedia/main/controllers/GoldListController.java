@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,5 +76,14 @@ public class GoldListController {
             List<Word> words = goldListRepository.buscarPalavrasPorGListEStatus(goldListId, wordStatus);
             return ResponseEntity.ok(words);
         }
+    }
+
+    @Operation(summary = "Update Gold List", description = "Updates a Gold List")
+    @PutMapping("/updateGoldList")
+    private ResponseEntity<GoldList> updateStatus(@RequestBody GoldList goldListToUpdate) {
+        GoldList goldList = goldListRepository.save(goldListToUpdate);
+
+        return ResponseEntity.ok(goldList);
+    }
     }
 }
