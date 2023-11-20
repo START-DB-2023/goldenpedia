@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,14 +42,18 @@ public class GoldListController {
         return ResponseEntity.ok(goldList);
     }
 
-    @Operation(summary = "Get All Gold Lists", description = "Returns all the Gold Lists")
+    @Operation(summary = "Get All Gold Lists By Page", description = "Returns all the Gold Lists in a given page")
     @GetMapping("/all")
-    private ResponseEntity<Iterable<GoldList>> getAllGoldLists() {
-        Iterable<GoldList> goldList = goldListRepository.findAll();
-        if (goldList == null) {
+    private ResponseEntity<Iterable<GoldList>> getAllGoldLists(
+            @RequestParam(value = "currentPage") int currentPage,
+            @RequestParam(value = "pageSize") int pageSize) {
+
+        Pageable pageable = PageRequest.of(currentPage, pageSize);
+        Iterable<GoldList> goldLists = goldListRepository.findAll(pageable);
+        if (goldLists == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(goldList);
+        return ResponseEntity.ok(goldLists);
     }
 
     @Operation(summary = "Get Word By Gold List Id", description = "Returns a word within a Gold List with a specific id")
