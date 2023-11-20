@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 export function NewGoldListPage() {
   return (
     <Container component="main" maxWidth="xs">
-      <Box 
+      <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -24,12 +24,12 @@ export function NewGoldListPage() {
             alignContent: 'center',
             textAlign: 'center'
           }}>
-          <Typography component="h4" sx={{ marginBottom: '0.5rem', color: '#C7981F', fontWeight: 'bold'}}> CRIE UM NOME PARA A GOLDLIST</Typography>
+          <Typography component="h4" sx={{ marginBottom: '0.5rem', color: '#C7981F', fontWeight: 'bold' }}> CRIE UM NOME PARA A GOLDLIST</Typography>
           <TextField id="outlined-basic" label="DIGITE UM NOME" variant="outlined" />
-          <Typography component="h4" sx={{marginTop: '0.5rem', marginBottom: '1rem', color: '#C7981F', fontWeight: 'bold'}}>AGORA UMA DESCRIÇÃO</Typography>
-          <TextField 
-            id="outlined-basic" 
-            label="DIGITE UMA DESCRIÇÃO" 
+          <Typography component="h4" sx={{ marginTop: '0.5rem', marginBottom: '1rem', color: '#C7981F', fontWeight: 'bold' }}>AGORA UMA DESCRIÇÃO</Typography>
+          <TextField
+            id="outlined-basic"
+            label="DIGITE UMA DESCRIÇÃO"
             variant="outlined"
             aria-multiline
             maxRows={20}
@@ -40,11 +40,11 @@ export function NewGoldListPage() {
             display: 'flex',
             justifyItems: 'space-between'
           }}>
-          <Link to={'/'}>
-            <Button variant='contained' sx={{  bgcolor: '#FF7272', width: '8rem' }}>CANCELAR</Button>
-          </Link>
-          <Button variant='contained' sx={{ bgcolor: '#72FF99', width: '8rem'}}>CRIAR</Button>
-        </Box>
+            <Link to={'/'}>
+              <Button variant='contained' sx={{ bgcolor: '#FF7272', width: '8rem' }}>CANCELAR</Button>
+            </Link>
+            <Button variant='contained' sx={{ bgcolor: '#72FF99', width: '8rem' }}>CRIAR</Button>
+          </Box>
         </Box>
       </Box>
     </Container>
