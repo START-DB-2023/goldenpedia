@@ -1,6 +1,6 @@
 package com.goldenpedia.main.domain;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.annotations.Cascade;
@@ -34,7 +34,7 @@ public class GoldList {
   @JoinTable(name = "goldlists_words", joinColumns = @JoinColumn(name = "goldenlist_id"), inverseJoinColumns = @JoinColumn(name = "word_id"))
   private List<Word> words;
   @Column(nullable = false)
-  private LocalTime createdAt = LocalTime.now();
+  private LocalDate createdAt = LocalDate.now();
 
   protected GoldList() {
   }
