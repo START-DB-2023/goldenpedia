@@ -1,15 +1,16 @@
-import { Container } from "@mui/material";
+import { Logo, NavContainer } from "./styles";
+import logoImg from '../../assets/logo.svg'
+import { MenuBook } from "@mui/icons-material";
+import MenuIcon from '@mui/icons-material/Menu';
 
-export function NavBar(){
+
+
+export function NavBar() {
   return (
-    <Container sx={{
-      p: '2' 
-
-    }}>
-      <ul>
-      <li><p>Menu de Amburguer</p></li>
-      <li><p>Livrinho</p></li>
-      </ul> 
-    </Container>
+    <NavContainer >
+      <MenuIcon sx={{ fontSize: 45, color: "#C7981F" }} />
+      <Logo src={logoImg} alt="Golden Book" />
+      <MenuBook sx={{ fontSize: 45, color: "#C7981F" }} />
+    </NavContainer>
   )
 }

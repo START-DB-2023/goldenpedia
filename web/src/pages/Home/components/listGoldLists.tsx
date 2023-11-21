@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 
-import { GoldListsService, IGoldList } from "../../services/api/goldlists/GoldListsService";
+import { GoldListsService, IGoldList } from "../../../services/api/goldlists/GoldListsService";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 
@@ -33,7 +33,6 @@ export function ListGoldLists() {
 
     return (
         <>
-            <h2>Suas Gold Lists</h2>
             <TableContainer>
                 <Table stickyHeader>
                     <TableHead>

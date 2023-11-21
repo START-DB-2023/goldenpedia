@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Button, Container, Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 import { GoldListsService } from "../../services/api/goldlists/GoldListsService";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IWord } from "../../services/api/words/WordsService";
+import OpenWordDialog from "../../components/openWordDialog";
 
 
 export function OpenGoldList() {
@@ -11,6 +12,16 @@ export function OpenGoldList() {
     const location = useLocation();
 
     const [rows, setRows] = useState<IWord[]>([]);
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
 
@@ -46,12 +57,17 @@ export function OpenGoldList() {
                                     bgcolor: "#F9DD96",
                                     color: "#484646",
                                     ":hover": { bgcolor: '#C7981F' }
-                                }} onClick={() => navigate('/openword', { replace: true })}>ABRIR</Button></TableCell>
+                                }} onClick={handleClickOpen}>ABRIR</Button></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer >
+
+            <Dialog open={open} onClose={handleClose}>
+                <OpenWordDialog />
+            </Dialog>
+
             <Button variant="contained" sx={{ color: '#484646', bgcolor: '#D3D7DA', ":hover": { bgcolor: '#7f8284' }, alignSelf: "flex-start" }}
                 onClick={() => {
                     navigate(-1)
