@@ -2,11 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { Button, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 
 import { GoldListsService, IGoldList } from "../../services/api/goldlists/GoldListsService";
-import { Link, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 
 export function ListGoldLists() {
     const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     const [rows, setRows] = useState<IGoldList[]>([]);
     const [totalElements, setTotalElements] = useState(0);
@@ -32,6 +33,7 @@ export function ListGoldLists() {
 
     return (
         <>
+            <h2>Suas Gold Lists</h2>
             <TableContainer>
                 <Table stickyHeader>
                     <TableHead>
@@ -39,26 +41,27 @@ export function ListGoldLists() {
                             <TableCell>Nome</TableCell>
                             <TableCell>Data</TableCell>
                             <TableCell>Descrição</TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows.map(row => (
                             <TableRow component={Paper} variant="outlined" square={false} key={row.id} sx={{ borderWidth: '0.2rem' }}>
-                                <TableCell contentEditable={true}>{row.name}</TableCell>
+                                <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.createdAt.toString()}</TableCell>
-                                <TableCell contentEditable={true}>{row.description}</TableCell>
-                                <TableCell><Link to={'/'}><Button variant="contained" sx={{
+                                <TableCell>{row.description}</TableCell>
+                                <TableCell><Button variant="contained" sx={{
                                     bgcolor: "#F9DD96",
                                     color: "#484646",
                                     ":hover": { bgcolor: '#C7981F' }
-                                }}>ABRIR</Button></Link></TableCell>
+                                }} onClick={() => navigate(`/goldlist`, { state: { id: row.id, name: row.name, description: row.description } })}>ABRIR</Button></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                     <TableFooter>
                         {totalElements !== 0 && totalPages > 1 && (<TableRow>
                             <TableCell colSpan={4}>
-                                <Pagination page={currentPage} count={totalPages} onChange={(event, newPage) => {
+                                <Pagination page={currentPage} count={totalPages} onChange={(_, newPage) => {
                                     setSearchParams({ currentPage: newPage.toString() })
                                 }} />
                             </TableCell>
