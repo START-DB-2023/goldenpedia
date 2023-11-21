@@ -1,10 +1,34 @@
 import { Box, Container, TextField, Typography } from '@mui/material';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 
+
+import { useForm, SubmitHandler } from "react-hook-form";
+import { GoldListsService } from '../../services/api/goldlists/GoldListsService';
+
+type NewGoldListFormData = {
+  name: string;
+  description: string;
+}
+
 export function NewGoldListPage() {
+  const { register, handleSubmit, formState: { errors } } = useForm<NewGoldListFormData>();
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<NewGoldListFormData> = data => {
+    GoldListsService.create({
+      name: data.name,
+      description: data.description,
+      words: []
+    })
+    navigate(-1)
+  };
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" sx={{
+      width: '40vw',
+      height: '50vh',
+    }}>
       <Box
         sx={{
           display: 'flex',
@@ -17,7 +41,7 @@ export function NewGoldListPage() {
           border: '3px solid #c0c0c0'
         }}
       >
-        <Box component="form" noValidate
+        <Box component="form" onSubmit={handleSubmit(onSubmit)}
           sx={{
             mt: 1,
             justifyContent: 'center',
@@ -25,7 +49,7 @@ export function NewGoldListPage() {
             textAlign: 'center'
           }}>
           <Typography component="h4" sx={{ marginBottom: '0.5rem', color: '#C7981F', fontWeight: 'bold' }}> CRIE UM NOME PARA A GOLDLIST</Typography>
-          <TextField id="outlined-basic" label="DIGITE UM NOME" variant="outlined" />
+          <TextField id="outlined-basic" label="DIGITE UM NOME" variant="outlined" {...register("name", { required: true })} />
           <Typography component="h4" sx={{ marginTop: '0.5rem', marginBottom: '1rem', color: '#C7981F', fontWeight: 'bold' }}>AGORA UMA DESCRIÇÃO</Typography>
           <TextField
             id="outlined-basic"
@@ -33,6 +57,7 @@ export function NewGoldListPage() {
             variant="outlined"
             aria-multiline
             maxRows={20}
+            {...register("description", { required: true })}
           />
           <Box sx={{
             margin: '2rem',
@@ -40,10 +65,8 @@ export function NewGoldListPage() {
             display: 'flex',
             justifyItems: 'space-between'
           }}>
-            <Link to={'/'}>
-              <Button variant='contained' sx={{ bgcolor: '#FF7272', width: '8rem' }}>CANCELAR</Button>
-            </Link>
-            <Button variant='contained' sx={{ bgcolor: '#72FF99', width: '8rem' }}>CRIAR</Button>
+            <Button onClick={() => navigate(-1)} variant='contained' sx={{ bgcolor: '#FF7272', width: '8rem', color: "#484646", ":hover": { bgcolor: '#f73d3d' } }}>CANCELAR</Button>
+            <Button type='submit' variant='contained' sx={{ bgcolor: '#72FF99', width: '8rem', color: "#484646", ":hover": { bgcolor: '#3ef970' } }}>CRIAR</Button>
           </Box>
         </Box>
       </Box>
