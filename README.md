@@ -50,7 +50,41 @@ Este aplicativo web implementa a nossa adaptação do método de forma virtual. 
 
 ## Getting Started
 
-Está seção está sendo escrita e será adicionada em breve a este README.md
+As instruções a seguir mostram como configurar este projeto localmente.
+Para obter uma cópia local funcionando, siga estas etapas.
+
+### Pré-requisitos
+
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+* Insomnia (opcional):
+  <a href="https://insomnia.rest/download"> faça o download </a>
+  
+### Instalação
+
+1. Clone este repositório
+   ```sh
+   git clone https://github.com/START-DB-2023/goldenpedia.git
+   ```
+2. Instale as dependências do projeto
+   ```sh
+   npm install
+   ```
+4. GoldenPedia API REST:
+   <br/><br/> 4.1. No diretorio `goldenpedia`, rode estes comandos para rodar a API do sistema localmente:
+  ```sh
+  cd server
+  ```
+ ```sh
+  code .
+  ```
+6.
+7. Caso queira utilizar o sistema com dados de teste, importe o arquivo `Dados_de_teste_2023-11-22.json` para o Insomnia da sua máquina e rode os requests que desejar
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Desenvolvido com
