@@ -7,7 +7,7 @@ export const BgContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  height: 75vh;
+  height: 100vh;
   background-image: url(${goldenBook});
   background-size: 88%;
   background-repeat: no-repeat;

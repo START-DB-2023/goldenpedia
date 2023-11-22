@@ -4,9 +4,9 @@ import { DialogActions, DialogTitle, DialogContent, Collapse, CardContent, Typog
 import { ExpandMore } from '@mui/icons-material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
-import { WordsService } from '../services/api/words/WordsService';
+import { IWord, WordsService } from '../services/api/words/WordsService';
 
-export default function OpenWordDialog() {
+export default function OpenWordDialog(word: IWord) {
     const [expanded, setExpanded] = useState(false);
     const [status, setStatus] = useState('Revisar');
 
@@ -21,7 +21,7 @@ export default function OpenWordDialog() {
 
     return (
         <>
-            <DialogTitle sx={{ color: "#C7981F" }}>WORD</DialogTitle>
+            <DialogTitle sx={{ color: "#C7981F" }}>{word.word}</DialogTitle>
             <DialogContent>
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                     <InputLabel id="demo-select-small-label">Status</InputLabel>

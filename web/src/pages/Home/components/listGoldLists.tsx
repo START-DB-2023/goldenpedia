@@ -38,7 +38,7 @@ export function ListGoldLists() {
                     <TableHead>
                         <TableRow>
                             <TableCell>Nome</TableCell>
-                            <TableCell>Data</TableCell>
+                            <TableCell width={150}>Data</TableCell>
                             <TableCell>Descrição</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
