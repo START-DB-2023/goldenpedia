@@ -28,16 +28,17 @@ export function OpenGoldList() {
     };
 
     const handleClose = () => {
-        setExpanded(false);
         setOpen(false);
+        setExpanded(false);
     };
 
     const [expanded, setExpanded] = useState(false);
-    const [status, setStatus] = useState("Revisar");
+    const [status, setStatus] = useState('');
 
     const handleChange = (event: SelectChangeEvent) => {
         setStatus(event.target.value);
-        WordsService.updateStatus(wordSelected.id, status);
+        console.log(`id: ${wordSelected.id} status: ${event.target.value}`);
+        WordsService.updateStatus(wordSelected.id, event.target.value);
     };
 
     const handleExpandClick = () => {
@@ -54,7 +55,7 @@ export function OpenGoldList() {
             }).catch((error: Error) => {
                 console.log(error);
             });
-    }, [wordSelected.status]);
+    }, []);
 
     return (
         <Container maxWidth="sm" sx={{ bgcolor: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', maxHeight: '80vh' }}>
@@ -93,7 +94,7 @@ export function OpenGoldList() {
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
-                            value={wordSelected.status.toString()}
+                            value={status}
                             label="Status"
                             onChange={handleChange}
                         >

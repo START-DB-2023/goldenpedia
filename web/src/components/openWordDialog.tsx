@@ -12,7 +12,7 @@ export default function OpenWordDialog(word: IWord) {
 
     const handleChange = (event: SelectChangeEvent) => {
         setStatus(event.target.value);
-        WordsService.updateStatus(1, status);
+        WordsService.updateStatus(word.id, status);
     };
 
     const handleExpandClick = () => {
