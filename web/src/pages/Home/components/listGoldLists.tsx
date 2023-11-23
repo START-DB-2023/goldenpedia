@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button, IconButton, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { GoldListsService, IGoldList } from "../../../services/api/goldlists/GoldListsService";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -66,6 +67,9 @@ export function ListGoldLists() {
                                 <TableCell>{row.description}</TableCell>
                                 <TableCell sx={{ minWidth: 10, maxWidth: 15 }}>
                                     <IconButton onClick={() => handleDelete(row.id)}><DeleteIcon fontSize="small" /></IconButton>
+                                </TableCell>
+                                <TableCell sx={{ minWidth: 10, maxWidth: 15 }}>
+                                    <IconButton onClick={() => navigate(`/goldlist/edit/${row.id}`)}><EditIcon fontSize="small" /></IconButton>
                                 </TableCell>
                                 <TableCell><Button variant="contained" sx={{
                                     bgcolor: "#F9DD96",
