@@ -31,6 +31,8 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'com.h2database:h2'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
+	implementation 'at.favre.lib:bcrypt:0.10.2'
 }
 
 tasks.named('test') {

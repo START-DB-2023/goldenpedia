@@ -2,9 +2,11 @@ package com.goldenpedia.main.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -21,6 +23,9 @@ public class Word {
   private String translation;
   @Column(nullable = false)
   private String status = "Revisar";
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  private GoldList goldlist_id;
 
 
   protected Word(){}

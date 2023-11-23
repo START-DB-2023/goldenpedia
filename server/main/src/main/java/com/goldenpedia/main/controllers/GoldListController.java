@@ -2,10 +2,13 @@ package com.goldenpedia.main.controllers;
 
 import com.goldenpedia.main.domain.*;
 import com.goldenpedia.main.repository.GoldListRepository;
+import com.goldenpedia.main.repository.UserRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,10 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoldListController {
     @Autowired
     GoldListRepository goldListRepository;
+    UserRepository userRepository;
 
     @Operation(summary = "Create Gold List", description = "Creates a new Gold List")
     @PostMapping
-    private ResponseEntity<GoldList> createGoldList(@RequestBody GoldList newGoldListRequest) {
+    private ResponseEntity<GoldList> createGoldList(@RequestBody GoldList newGoldListRequest, HttpServletRequest request) {
+        var idUser = request.getAttribute("idUser");
+        var user = userRepository.findById((UUID) idUser).orElse(null);
+        //newGoldListRequest.setUser_id(user.getId());
         GoldList goldList = goldListRepository.save(newGoldListRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(goldList);
     }
