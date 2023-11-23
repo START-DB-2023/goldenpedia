@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './LoginPage.css'; 
+import './loginPage.css'; 
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
