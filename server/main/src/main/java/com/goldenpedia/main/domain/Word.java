@@ -25,8 +25,9 @@ public class Word {
   private String status = "Revisar";
 
   @ManyToOne(fetch = FetchType.EAGER)
-  private GoldList goldlist_id;
+  private GoldList goldlist;
 
+  //private Long goldlist_id;
 
   protected Word(){}
 

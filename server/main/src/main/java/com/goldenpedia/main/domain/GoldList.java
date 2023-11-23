@@ -31,8 +31,12 @@ public class GoldList {
   @Column(nullable = false)
   private String description;
   
-  @ManyToOne(fetch = FetchType.EAGER)
-  private User user_id;
+  @ManyToOne
+  @JoinColumn(name="user_id", nullable=false)
+  private User user;
+
+  //private Long user_id;
+
 
   @OneToMany(fetch = FetchType.EAGER)
   @Cascade({ CascadeType.MERGE, CascadeType.PERSIST })

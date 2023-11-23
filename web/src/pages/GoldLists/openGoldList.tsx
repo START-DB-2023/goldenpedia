@@ -4,7 +4,6 @@ import { Button, CardContent, Collapse, Container, Dialog, DialogActions, Dialog
 import { GoldListsService } from "../../services/api/goldlists/GoldListsService";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IWord, WordsService } from "../../services/api/words/WordsService";
-import OpenWordDialog from "../../components/openWordDialog";
 import { ExpandMore } from "@mui/icons-material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -15,7 +14,7 @@ export function OpenGoldList() {
 
     const [rows, setRows] = useState<IWord[]>([]);
     const [wordSelected, setWordSelected] = useState<IWord>({
-        id: 0,
+        id: 0,  
         word: '',
         translation: '',
         status: ''
@@ -37,7 +36,6 @@ export function OpenGoldList() {
 
     const handleChange = (event: SelectChangeEvent) => {
         setStatus(event.target.value);
-        console.log(`id: ${wordSelected.id} status: ${event.target.value}`);
         WordsService.updateStatus(wordSelected.id, event.target.value);
     };
 
@@ -55,7 +53,7 @@ export function OpenGoldList() {
             }).catch((error: Error) => {
                 console.log(error);
             });
-    }, []);
+    }, [status]);
 
     return (
         <Container maxWidth="sm" sx={{ bgcolor: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', maxHeight: '80vh' }}>

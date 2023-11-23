@@ -37,7 +37,7 @@ public class GoldListController {
     @PostMapping
     private ResponseEntity<GoldList> createGoldList(@RequestBody GoldList newGoldListRequest, HttpServletRequest request) {
         var idUser = request.getAttribute("idUser");
-        var user = userRepository.findById((UUID) idUser).orElse(null);
+        var user = userRepository.findById((Long) idUser).orElse(null);
         //newGoldListRequest.setUser_id(user.getId());
         GoldList goldList = goldListRepository.save(newGoldListRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(goldList);
