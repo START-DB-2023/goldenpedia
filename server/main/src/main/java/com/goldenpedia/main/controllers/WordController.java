@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +22,16 @@ import io.swagger.v3.oas.annotations.Operation;
 public class WordController {
     @Autowired
     WordRepository wordRepository;
+
+    @Operation(summary = "Get Word By Id", description = "Returns a word with a specific id")
+    @GetMapping()
+    private ResponseEntity<Word> getGoldList(@RequestParam(value = "wordId") Long wordId) {
+        Word word = wordRepository.findById(wordId).orElse(null);
+        if (word == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(word);
+    }
 
     @Operation(summary = "Get Words By Status", description = "Returns all the words with a specific status")
     @GetMapping("/{status}")

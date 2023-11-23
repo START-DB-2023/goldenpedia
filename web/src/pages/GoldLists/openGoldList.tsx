@@ -33,11 +33,10 @@ export function OpenGoldList() {
     };
 
     const [expanded, setExpanded] = useState(false);
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState('Revisar');
 
     const handleChange = (event: SelectChangeEvent) => {
         setStatus(event.target.value);
-        console.log(`id: ${wordSelected.id} status: ${event.target.value}`);
         WordsService.updateStatus(wordSelected.id, event.target.value);
     };
 
@@ -55,7 +54,7 @@ export function OpenGoldList() {
             }).catch((error: Error) => {
                 console.log(error);
             });
-    }, []);
+    }, [rows]);
 
     return (
         <Container maxWidth="sm" sx={{ bgcolor: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', maxHeight: '80vh' }}>
@@ -79,7 +78,7 @@ export function OpenGoldList() {
                                     bgcolor: "#F9DD96",
                                     color: "#484646",
                                     ":hover": { bgcolor: '#C7981F' }
-                                }} onClick={() => { handleClickOpen(), setWordSelected({ id: word.id, word: word.word, translation: word.translation, status: word.status }) }}>ABRIR</Button></TableCell>
+                                }} onClick={() => { handleClickOpen(), setStatus((word.status).toString()), setWordSelected({ id: word.id, word: word.word, translation: word.translation, status: word.status }) }}>ABRIR</Button></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
