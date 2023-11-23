@@ -6,11 +6,14 @@ import Button from '@mui/material/Button';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { GoldListsService } from '../../services/api/goldlists/GoldListsService';
 import { IWord } from '../../services/api/words/WordsService';
+import { useEffect, useState } from 'react';
 
 export function NewWordPage() {
     const location = useLocation();
-    const { register, handleSubmit, formState: { errors } } = useForm<IWord>();
+    const { register, handleSubmit, reset, formState, formState: { isSubmitSuccessful } } = useForm<IWord>({ defaultValues: { word: '', translation: '' } });
     const navigate = useNavigate();
+
+    const [submittedData, setSubmittedData] = useState<IWord>();
 
     const onSubmit: SubmitHandler<IWord> = async data => {
         const goldListId = location.state.newGoldList;
@@ -20,11 +23,24 @@ export function NewWordPage() {
             await GoldListsService.update({
                 ...goldList,
                 words: [data, ...goldList.words]
-            })
+            }).then(() => {
+                setSubmittedData(data);
+
+                alert(`Palavra adicionada com sucesso!
+                Adicione mais ou clique em "PRONTO" para sair.`)
+            });
+            console.log(goldList.words.length);
         }
+
 
         navigate(`/newword/${goldList.name}`, { state: { newGoldList: goldListId } })
     };
+
+    useEffect(() => {
+        if (formState.isSubmitSuccessful) {
+            reset({ word: '', translation: '' });
+        }
+    }, [formState, submittedData, reset]);
 
     return (
         <Container component="main" sx={{
@@ -59,8 +75,8 @@ export function NewWordPage() {
                         display: 'flex',
                         justifyItems: 'space-between'
                     }}>
-                        <Button onClick={() => navigate('/')} variant='contained' sx={{ bgcolor: '#FF7272', width: '8rem', color: "#484646", ":hover": { bgcolor: '#f73d3d' } }}>FECHAR</Button>
-                        <Button type='submit' variant='contained' sx={{ bgcolor: '#72FF99', width: '8rem', color: "#484646", ":hover": { bgcolor: '#3ef970' } }}>ADICIONAR</Button>
+                        <Button onClick={() => navigate('/')} variant='contained' sx={{ color: '#484646', bgcolor: '#D3D7DA', ":hover": { bgcolor: '#7f8284' }, width: '8rem' }}>PRONTO</Button>
+                        <Button type='submit' variant='contained' sx={{ bgcolor: '#72FF99', width: '8rem', color: "#484646", ":hover": { bgcolor: '#3ef970' }, marginLeft: '5.2rem' }}>ADICIONAR</Button>
                     </Box>
                 </Box>
             </Box>
