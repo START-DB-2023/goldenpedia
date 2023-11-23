@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button, CardContent, Collapse, Container, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Button, CardContent, Collapse, Container, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, IconButton, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 
 import { GoldListsService } from "../../services/api/goldlists/GoldListsService";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IWord, WordsService } from "../../services/api/words/WordsService";
-import OpenWordDialog from "../../components/openWordDialog";
 import { ExpandMore } from "@mui/icons-material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 export function OpenGoldList() {
@@ -66,7 +66,9 @@ export function OpenGoldList() {
                         <TableRow>
                             <TableCell>Palavra</TableCell>
                             <TableCell>Status</TableCell>
-                            <TableCell></TableCell>
+                            <TableCell sx={{ maxWidth: 30 }}>
+                                Adicionar <IconButton onClick={() => navigate(`/newWord/${location.state.name}`, { state: { newGoldList: location.state.id } })}><AddCircleIcon fontSize="small" /></IconButton>
+                            </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

@@ -53,7 +53,7 @@ export function ListGoldLists() {
                                     bgcolor: "#F9DD96",
                                     color: "#484646",
                                     ":hover": { bgcolor: '#C7981F' }
-                                }} onClick={() => navigate(`/goldlist`, { state: { id: row.id, name: row.name, description: row.description } })}>ABRIR</Button></TableCell>
+                                }} onClick={() => navigate(`/goldlist/${row.name}`, { state: { id: row.id, name: row.name, description: row.description } })}>ABRIR</Button></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

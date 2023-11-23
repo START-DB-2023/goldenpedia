@@ -1,5 +1,5 @@
 import { Box, Container, TextField, Typography } from '@mui/material';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 
 
@@ -15,13 +15,13 @@ export function NewGoldListPage() {
   const { register, handleSubmit, formState: { errors } } = useForm<NewGoldListFormData>();
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<NewGoldListFormData> = data => {
-    GoldListsService.create({
+  const onSubmit: SubmitHandler<NewGoldListFormData> = async data => {
+    const newGoldList = await GoldListsService.create({
       name: data.name,
       description: data.description,
       words: []
     })
-    navigate(-1)
+    navigate(`/newword/${data.name}`, { state: { newGoldList } })
   };
 
   return (
