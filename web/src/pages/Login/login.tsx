@@ -1,49 +1,32 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './loginPage.css'; 
+import { useNavigate } from 'react-router-dom';
 
-const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Button, Input, LoginBox, LoginForm, LoginPageContainer, Title } from './styles';
 
-  const handleLogin = async () => {
-    try {
-      console.log('Login successful:', loginResult);
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  };
 
+type newLoginForm = {
+  username: string;
+  password: string;
+}
+
+export function LoginPage(){
+
+  const { register, handleSubmit, formState: { errors } } = useForm<newLoginForm>();
+
+  const onSubmit: SubmitHandler<newLoginForm> = data => console.log(data);
+
+  const navigate = useNavigate();
   return (
-    <div className="login-page">
-      <div className="login-box">
-        <h2>Login</h2>
-        <form onSubmit={(e) => e.preventDefault()} className="login-form">
-          <label>
-            Username:
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <br />
-          <button onClick={handleLogin}>Login</button>
-          {/* Link para a página de registro */}
-          <Link to="/signup" className="register-button">Registrar</Link>
-        </form>
-      </div>
-    </div>
+    <LoginPageContainer>
+      <LoginBox>
+        <Title>Login</Title>
+        <LoginForm onSubmit={handleSubmit(onSubmit)}>
+        <Input placeholder='Enter com seu username...' {...register("username", { required: true })} />
+        <Input placeholder='Digite sua senha...' type='password' {...register("password", { required: true })}/>
+        <Button type='submit'>Entrar</Button>
+        <Button onClick={() => navigate('/signup')} >Cadastre-se</Button>
+        </LoginForm>
+      </LoginBox>
+    </LoginPageContainer>
   );
 };
-
-export default LoginPage;
