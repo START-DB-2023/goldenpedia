@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Button, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
-
+import { Button, IconButton, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { GoldListsService, IGoldList } from "../../../services/api/goldlists/GoldListsService";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -31,6 +31,19 @@ export function ListGoldLists() {
             });
     }, [currentPage]);
 
+    const handleDelete = (id: number) => {
+        if (confirm('Tem certeza que deseja apagar esta Gold List?')) {
+            GoldListsService.deleteById(id)
+                .then(() => {
+                    setRows(rowsBeforeDelete => [
+                        ...rowsBeforeDelete.filter(deletedRow => deletedRow.id != id)
+                    ]);
+
+                    alert('Gold list apagada com sucesso!')
+                })
+        }
+    }
+
     return (
         <>
             <TableContainer>
@@ -38,8 +51,10 @@ export function ListGoldLists() {
                     <TableHead>
                         <TableRow>
                             <TableCell>Nome</TableCell>
-                            <TableCell width={150}>Data</TableCell>
-                            <TableCell>Descrição</TableCell>
+                            <TableCell width={120} sx={{ minWidth: 120 }}>Data</TableCell>
+                            <TableCell width={200} sx={{ minWidth: 150 }}>Descrição</TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
@@ -49,6 +64,9 @@ export function ListGoldLists() {
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.createdAt.toString()}</TableCell>
                                 <TableCell>{row.description}</TableCell>
+                                <TableCell sx={{ minWidth: 10, maxWidth: 15 }}>
+                                    <IconButton onClick={() => handleDelete(row.id)}><DeleteIcon fontSize="small" /></IconButton>
+                                </TableCell>
                                 <TableCell><Button variant="contained" sx={{
                                     bgcolor: "#F9DD96",
                                     color: "#484646",

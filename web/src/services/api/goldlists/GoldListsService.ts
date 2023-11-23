@@ -75,6 +75,16 @@ const getById = async (id: number): Promise<IGoldList | Error> => {
     }
 };
 
+const deleteById = async (id: number): Promise<void | Error> => {
+    try {
+        await Api.delete(`/goldlist/deleteGoldList?goldListId=${id}`);
+
+        return new Error('Erro ao deletar Gold List');
+    } catch (error) {
+        return new Error((error as { message: string }).message || 'Erro ao deletaar Gold List');
+    }
+};
+
 const getWords = async (id: number, wordStatus: string = ''): Promise<IWord[] | Error> => {
     try {
         let url = wordStatus ? `/goldlist/words?goldListId=${id}&wordStatus=${wordStatus}`
@@ -97,5 +107,6 @@ export const GoldListsService = {
     create,
     update,
     getById,
+    deleteById,
     getWords
 };
