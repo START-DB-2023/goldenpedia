@@ -30,15 +30,13 @@ public class GoldListController {
     GoldListRepository goldListRepository;
 
     @Operation(summary = "Create Gold List", description = "Creates a new Gold List")
-    @PostMapping
-    private ResponseEntity<GoldList> createGoldList(@RequestBody GoldList newGoldListRequest) {
+    @PostMapping ResponseEntity<GoldList> createGoldList(@RequestBody GoldList newGoldListRequest) {
         GoldList goldList = goldListRepository.save(newGoldListRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(goldList);
     }
 
     @Operation(summary = "Get Gold List By Id", description = "Returns a Gold List with a specific id")
-    @GetMapping()
-    private ResponseEntity<GoldList> getGoldList(@RequestParam(value = "goldListId") Long goldListId) {
+    @GetMapping() ResponseEntity<GoldList> getGoldList(@RequestParam(value = "goldListId") Long goldListId) {
         GoldList goldList = goldListRepository.findById(goldListId).orElse(null);
         if (goldList == null) {
             return ResponseEntity.notFound().build();
