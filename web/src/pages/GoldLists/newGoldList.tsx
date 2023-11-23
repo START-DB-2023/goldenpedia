@@ -1,5 +1,5 @@
 import { Box, Container, TextField, Typography } from '@mui/material';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 
 
@@ -12,18 +12,31 @@ type NewGoldListFormData = {
 }
 
 export function NewGoldListPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm<NewGoldListFormData>();
+  const { register, handleSubmit, formState, formState: { defaultValues } } = useForm<NewGoldListFormData>();
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<NewGoldListFormData> = async data => {
-    const newGoldList = await GoldListsService.create({
-      name: data.name,
-      description: data.description,
-      words: []
-    })
-    navigate(`/newword/${data.name}`, { state: { newGoldList } })
-  };
+  const { id = 'new' } = useParams<'id'>();
 
+  const onSubmit: SubmitHandler<NewGoldListFormData> = async data => {
+    if (id === 'new') {
+      const newGoldList = await GoldListsService.create({
+        name: data.name,
+        description: data.description,
+        words: []
+      })
+      navigate(`/newword/${data.name}`, { state: { newGoldList } })
+    } else {
+      const goldListBeforeEdit = await GoldListsService.getById(Number(id));
+      if (!(goldListBeforeEdit instanceof Error)) {
+        await GoldListsService.update({
+          ...goldListBeforeEdit,
+          name: data.name,
+          description: data.description
+        })
+        navigate(`/`)
+      }
+    };
+  }
   return (
     <Container component="main" sx={{
       width: '40vw',
@@ -66,7 +79,8 @@ export function NewGoldListPage() {
             justifyItems: 'space-between'
           }}>
             <Button onClick={() => navigate(-1)} variant='contained' sx={{ bgcolor: '#FF7272', width: '8rem', color: "#484646", ":hover": { bgcolor: '#f73d3d' } }}>CANCELAR</Button>
-            <Button type='submit' variant='contained' sx={{ bgcolor: '#72FF99', width: '8rem', color: "#484646", ":hover": { bgcolor: '#3ef970' } }}>CRIAR</Button>
+            {id === 'new' && <Button type='submit' variant='contained' sx={{ bgcolor: '#72FF99', width: '8rem', color: "#484646", ":hover": { bgcolor: '#3ef970' } }}>CRIAR</Button>}
+            {id !== 'new' && <Button type='submit' variant='contained' sx={{ bgcolor: '#72FF99', width: '8rem', color: "#484646", ":hover": { bgcolor: '#3ef970' } }}>EDITAR</Button>}
           </Box>
         </Box>
       </Box>

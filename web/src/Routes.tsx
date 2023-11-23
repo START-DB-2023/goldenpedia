@@ -13,7 +13,7 @@ export function Router() {
       <Route path='/' element={<DefaultLayout />}>
         <Route path='/' element={<HomePage />} />
         <Route path='/goldlist/:id' element={<OpenGoldList />} />
-        <Route path='/goldlist/edit/:id' element={<h1>"Editar Gold List"</h1>} />
+        <Route path='/goldlist/edit/:id' element={<NewGoldListPage />} />
         <Route path='/newgoldlist' element={<NewGoldListPage />} />
         <Route path='/newword/:id' element={<NewWordPage />} />
       </Route>
