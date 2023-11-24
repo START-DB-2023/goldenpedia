@@ -56,6 +56,30 @@ public class GoldListControllerTest {
     }
 
     @Test
+    @DisplayName("Should return status 200 (Ok) when passing a valid id")
+    void getGoldListTest() throws Exception{
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders
+                .get("/goldlist")
+                .param("goldListId", "1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+    }
+
+    @Test
+    @DisplayName("Should return status 404 (Not Found) when passing an invalid id")
+    void getGoldList_NotFoundTest() throws Exception{
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders
+                .get("/goldlist")
+                .param("goldListId", "000")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
+    }
+
+    @Test
     @DisplayName("Should return status 200 (Ok)")
     void getAllGoldListsTest() throws Exception{
         LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
