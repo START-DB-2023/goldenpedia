@@ -41,7 +41,7 @@ public class WordController {
 
     @Operation(summary = "Update Word Status", description = "Updates a word's status")
     @PutMapping("/updateStatus")
-    private ResponseEntity<Word> updateStatus(@RequestParam(value = "wordId") Long wordId, @RequestParam(value = "status") String status){
+    public ResponseEntity<Word> updateStatus(@RequestParam(value = "wordId") Long wordId, @RequestParam(value = "status") String status){
         Word word = wordRepository.findById(wordId).orElse(null);
         if (word == null) {
             return ResponseEntity.notFound().build();
