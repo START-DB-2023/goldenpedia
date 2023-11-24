@@ -36,8 +36,7 @@ public class GoldList {
   @Column(nullable = false)
   private LocalDate createdAt = LocalDate.now();
 
-  public GoldList() {
-  }
+  protected GoldList(){}
 
   public GoldList(String name, String description, List<Word> words) {
     this.name = name;

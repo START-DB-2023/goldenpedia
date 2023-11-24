@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
 
 import com.goldenpedia.main.domain.GoldList;
 import com.goldenpedia.main.domain.Word;
@@ -51,6 +52,22 @@ public class GoldListControllerTest {
                         goldList).getJson()))
                 .andReturn().getResponse();
 
-        assertEquals(response.getStatus(), HttpStatus.CREATED.value());
+        assertEquals(HttpStatus.CREATED.value(), response.getStatus());
+    }
+
+    @Test
+    @DisplayName("Should return status 200 (Ok)")
+    void getAllGoldListsTest() throws Exception{
+        LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
+        requestParams.add("currentPage", "0");
+        requestParams.add("pageSize", "5");
+
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders
+                .get("/goldlist/all")
+                .params(requestParams)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
     }
 }
